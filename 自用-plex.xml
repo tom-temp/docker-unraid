@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>8003-plex-8004</Name>
+  <Repository>lscr.io/linuxserver/plex</Repository>
+  <Registry>https://github.com/orgs/linuxserver/packages/container/package/plex</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/linuxserver/docker-plex/issues/new/choose</Support>
+  <Project>https://plex.tv</Project>
+  <Overview>Plex(https://plex.tv) organizes video, music and photos from personal media libraries and streams them to smart TVs, streaming boxes and mobile devices. This container is packaged as a standalone Plex Media Server. has always been a top priority. Straightforward design and bulk actions mean getting things done faster.</Overview>
+  <Category/>
+  <WebUI>http://[IP]:[PORT:8003]/web/index.html</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/linuxserver/templates/master/unraid/plex.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/plex-logo.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1662644079</DateInstalled>
+  <DonateText>Donations</DonateText>
+  <DonateLink>https://www.linuxserver.io/donate</DonateLink>
+  <Description>Plex(https://plex.tv) organizes video, music and photos from personal media libraries and streams them to smart TVs, streaming boxes and mobile devices. This container is packaged as a standalone Plex Media Server. has always been a top priority. Straightforward design and bulk actions mean getting things done faster.</Description>
+  <Networking>
+    <Mode>bridge</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8003</HostPort>
+        <ContainerPort>32400</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>8004</HostPort>
+        <ContainerPort>1900</ContainerPort>
+        <Protocol>udp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>5353</HostPort>
+        <ContainerPort>5353</ContainerPort>
+        <Protocol>udp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>8324</HostPort>
+        <ContainerPort>8324</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>32469</HostPort>
+        <ContainerPort>32469</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>32410</HostPort>
+        <ContainerPort>32410</ContainerPort>
+        <Protocol>udp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>32412</HostPort>
+        <ContainerPort>32412</ContainerPort>
+        <Protocol>udp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>32413</HostPort>
+        <ContainerPort>32413</ContainerPort>
+        <Protocol>udp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>32414</HostPort>
+        <ContainerPort>32414</ContainerPort>
+        <Protocol>udp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/own-image/</HostDir>
+      <ContainerDir>/image</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir/>
+      <ContainerDir>/movies</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/[s]-docker/storage/plex</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>docker</Value>
+      <Name>VERSION</Name>
+      <Mode>{3}</Mode>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>PLEX_CLAIM</Name>
+      <Mode>{3}</Mode>
+    </Variable>
+    <Variable>
+      <Value>1000</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>022</Value>
+      <Name>UMASK</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Path: /image" Target="/image" Default="/mnt/user/own-image/" Mode="rw" Description="Media goes here. Add as many as needed e.g. `/movies`, `/tv`, etc." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/own-image/</Config>
+  <Config Name="Path: /movies" Target="/movies" Default="" Mode="rw" Description="Media goes here. Add as many as needed e.g. `/movies`, `/tv`, etc." Type="Path" Display="always" Required="false" Mask="false"/>
+  <Config Name="VERSION" Target="VERSION" Default="docker" Mode="{3}" Description="Set whether to update plex or not - see Application Setup section." Type="Variable" Display="always" Required="true" Mask="false">docker</Config>
+  <Config Name="PLEX_CLAIM" Target="PLEX_CLAIM" Default="" Mode="{3}" Description="Optionally you can obtain a claim token from https://plex.tv/claim and input here. Keep in mind that the claim tokens expire within 4 minutes." Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Appdata" Target="/config" Default="/mnt/user/[s]-docker/storage/plex" Mode="rw" Description="Plex library location. *This can grow very large, 50gb+ is likely for a large collection.*" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/[s]-docker/storage/plex</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="true" Mask="false">1000</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="always" Required="true" Mask="false">100</Config>
+  <Config Name="GPU" Target="" Default="/dev/dri" Mode="" Description="gpu driver" Type="Device" Display="always" Required="false" Mask="false">/dev/dri</Config>
+  <Config Name="webui" Target="32400" Default="32400" Mode="tcp" Description="&#x5BB9;&#x5668; Port: 32400" Type="Port" Display="always" Required="true" Mask="false">8003</Config>
+  <Config Name="Plex DLNA" Target="1900" Default="1900" Mode="udp" Description="&#x5BB9;&#x5668; Port: 1900" Type="Port" Display="always" Required="false" Mask="false">8004</Config>
+  <Config Name="older Bonjour" Target="5353" Default="5353" Mode="udp" Description="UDP: 5353 (older Bonjour/Avahi network discovery)" Type="Port" Display="always" Required="false" Mask="false">5353</Config>
+  <Config Name="Roku" Target="8324" Default="8324" Mode="tcp" Description="TCP: 8324 (controlling Plex for Roku via Plex Companion)" Type="Port" Display="always" Required="false" Mask="false">8324</Config>
+  <Config Name="DLNA access" Target="32469" Default="32469" Mode="tcp" Description="TCP: 32469 (access to the Plex DLNA Server)" Type="Port" Display="always" Required="false" Mask="false">32469</Config>
+  <Config Name="GDM discovery01" Target="32410" Default="32410" Mode="udp" Description="UDP: 32410, 32412, 32413, 32414 (current GDM network discovery)" Type="Port" Display="always" Required="false" Mask="false">32410</Config>
+  <Config Name="GDM discovery02" Target="32412" Default="32412" Mode="udp" Description="UDP: 32410, 32412, 32413, 32414 (current GDM network discovery)" Type="Port" Display="always" Required="false" Mask="false">32412</Config>
+  <Config Name="GDM discovery03" Target="32413" Default="32413" Mode="udp" Description="UDP: 32410, 32412, 32413, 32414 (current GDM network discovery)" Type="Port" Display="always" Required="false" Mask="false">32413</Config>
+  <Config Name="GDM discovery04" Target="32414" Default="32414" Mode="udp" Description="UDP: 32410, 32412, 32413, 32414 (current GDM network discovery)" Type="Port" Display="always" Required="false" Mask="false">32414</Config>
+  <Config Name="UMASK" Target="UMASK" Default="022" Mode="" Description="Container Variable: UMASK" Type="Variable" Display="advanced" Required="false" Mask="false">022</Config>
+</Container>
