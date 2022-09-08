@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  filerun:
+    image: tomtemp1416/filerun:debian-noffmpeg
+    container_name: filerun
+    environment:
+      GO_RUN_USER: tom
+      GO_RUN_USER_ID: 1000
+      GO_RUN_GROUP_ID: 100     # be more than>= 100
+    ports:
+      - "8083:8080"
+    volumes:
+      - /opt/data/filerun/html:/www-data     # php file
+      - /opt/data/filerun/user-files:/user-files         # superuser file
+      - /dev/dir:/dev/dir

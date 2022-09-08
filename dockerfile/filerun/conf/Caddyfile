@@ -1,0 +1,6 @@
+
+:${WEBPORT} {
+    root * /www-data/filerun
+    php_fastcgi 127.0.0.1:9000
+    file_server
+}

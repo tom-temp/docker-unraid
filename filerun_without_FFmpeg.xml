@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>filerun-noffmpeg</Name>
+  <Repository>tomtemp1416/filerun:debian-noffmpeg</Repository>
+  <Registry>https://hub.docker.com/r/tomtemp1416/filerun</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support/>
+  <Project>https://github.com/tom-temp/docker-unraid</Project>
+  <Overview>deploy filerun use debian php + caddy2&#xD;
+I don't add FFmpeg to this image, cus that is too huge. If you want to use FFmpeg to create the preview for videos, please add it by youself</Overview>
+  <Category>Cloud:</Category>
+  <WebUI>http://[IP]:[PORT:8080]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/SmartPhoneLover/unraid-docker-templates/master/templates/Portainer-CE.xml</TemplateURL>
+  <Icon>https://www.filerun.com/images/logo.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1662601405</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>deploy filerun use debian php + caddy2&#xD;
+I don't add FFmpeg to this image, cus that is too huge. If you want to use FFmpeg to create the preview for videos, please add it by youself</Description>
+  <Networking>
+    <Mode>bridge</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8080</HostPort>
+        <ContainerPort>8080</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/filerun/www-data</HostDir>
+      <ContainerDir>/www-data</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/filerun/supervisor</HostDir>
+      <ContainerDir>/user-files</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>tom</Value>
+      <Name>GO_RUN_USER</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>1000</Value>
+      <Name>GO_RUN_USER_ID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>GO_RUN_GROUP_ID</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="web ui" Target="8080" Default="8080" Mode="tcp" Description="web port" Type="Port" Display="always" Required="true" Mask="false">8080</Config>
+  <Config Name="filerun php file" Target="/www-data" Default="/mnt/user/filerun/www-data" Mode="rw" Description="filerun php path" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/filerun/www-data</Config>
+  <Config Name="superuser file" Target="/user-files" Default="/mnt/user/filerun/supervisor" Mode="rw" Description="# superuser file&#13;&#10;" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/filerun/supervisor</Config>
+  <Config Name="RUN_USER" Target="GO_RUN_USER" Default="tom" Mode="" Description="what name you want to use to run" Type="Variable" Display="always" Required="false" Mask="false">tom</Config>
+  <Config Name="RUN_USER_ID" Target="GO_RUN_USER_ID" Default="1000" Mode="" Description="what uid you want to use it run" Type="Variable" Display="always" Required="false" Mask="false">1000</Config>
+  <Config Name="RUN_GROUP_ID" Target="GO_RUN_GROUP_ID" Default="100" Mode="" Description="what group id you want to use it run" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+</Container>
