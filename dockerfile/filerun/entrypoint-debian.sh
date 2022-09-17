@@ -43,18 +43,27 @@ $overwriteDefaultSettings = [
 ];
 $queries[] = "UPDATE `df_users_permissions` SET `homefolder` = '/user-files' WHERE uid='1'";
 EOF
+fi
+if [ ! -w "/var/log/accessable" ] || [ ! -w "/var/log/php8.0-fpm.log" ] ;  then
     # php权限问题
-    rm    -f /var/log/php7.3-fpm.log /var/log/php7.4-fpm.log /var/log/php8.0-fpm.log
+    echo "cant write accessable" >> /www-data/filerun/00log/accessable
+    rm    -f /var/log/php7.3-fpm.log /var/log/php7.4-fpm.log /var/log/php8.0-fpm.log /var/log/php7-fpm.log /var/log/accessable
+    rm   -rf /var/log/php7
     mkdir -p /www-data/filerun/00log
     touch    /www-data/filerun/00log/php-fpm.log
     ln    -s /www-data/filerun/00log /var/log/php7
+    echo "ln -s php directory" >> /www-data/filerun/00log/accessable
+    ln    -s /var/log/php7/accessable  /var/log/accessable
+    ln    -s /var/log/php7/php-fpm.log /var/log/php7-fpm.log
     ln    -s /var/log/php7/php-fpm.log /var/log/php7.3-fpm.log
     ln    -s /var/log/php7/php-fpm.log /var/log/php7.4-fpm.log
     ln    -s /var/log/php7/php-fpm.log /var/log/php8.0-fpm.log
+    echo "ln -s to php-log" >> /www-data/filerun/00log/accessable
     chown -R ${GO_RUN_USER}:${GO_RUN_GROUP} /www-data/filerun
     chown -R ${GO_RUN_USER}:${GO_RUN_GROUP} /user-files
     chown -R ${GO_RUN_USER}:${GO_RUN_GROUP} /filerun
     chown -R ${GO_RUN_USER}:${GO_RUN_GROUP} /run/php
+    echo "pass chown" >> /www-data/filerun/00log/accessable
 fi
 if [ ! -e "/filerun/supervisord.conf" ];  then
     # sleep 60
