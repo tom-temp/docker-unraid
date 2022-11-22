@@ -6,8 +6,8 @@ services:
     container_name: filerun
     environment:
       GO_RUN_USER: tom
-      GO_RUN_USER_ID: 1000
-      GO_RUN_GROUP_ID: 100     # be more than>= 100
+      GO_RUN_USER_ID: "1000"
+      GO_RUN_GROUP_ID: "100"     # be more than>= 100
     ports:
       - "8083:8080"
     volumes:
